@@ -12,7 +12,7 @@
 #### 1. Authorized User
 - **Command**:  
     ```bash
-    curl -X GET http://localhost:port/api/resource -H "Authorization: Bearer <valid_token>"
+    curl -X GET http://localhost:port/api/resource -H "Authorization: Bearer mock_valid_token"
     ```
 - **Expected Output**:  
     ```json
@@ -24,16 +24,19 @@
         }
     }
     ```
-
-#### 2. Unauthorized User
+#### 2. Create a New User
 - **Command**:  
     ```bash
-    curl -X GET http://localhost:port/api/resource
+    curl -X POST http://localhost:port/api/users \
+    -H "Authorization: Bearer mock_valid_token" \
+    -H "Content-Type: application/json" \
+    -d '{"name": "John Doe", "email": "john.doe@example.com"}'
     ```
 - **Expected Output**:  
     ```json
     {
-        "status": "error",
-        "message": "Unauthorized access"
+        "id": 1,
+        "name": "John Doe",
+        "email": "john.doe@example.com"
     }
     ```
